@@ -17,7 +17,7 @@
  * 
  */
 
-package no.nibio.vips.model.septoriawethourmodel;
+package no.nibio.vips.model.septoriahumiditymodel;
 
 import no.nibio.vips.util.DateMap;
 
@@ -32,8 +32,13 @@ public class DataMatrix extends DateMap {
     public final static String UM = "UM";
     // Hourly leaf wetness
     public final static String BT = "BT";
-    // Wet hour sum for sliding middle
-    public final static String WHS = "WHS";
-    // Current hour is wet hour? 1 : 0
-    public final static String WH = "WH";
+    // Humid hour sum for sliding middle
+    public final static String HHS = "HHS";
+    
+    // Current hour is humid hour? 1 : 0
+    public final static String HH = "HH";
+    // Humid period hour (consecutive humid hours)
+    public final static String HPH = "HPH";
+    // Humid period hour (consecutive humid hours) corrected for protection period
+    public final static String HPHPP = "HPHPP";
 }
