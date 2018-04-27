@@ -93,7 +93,7 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
         Boolean humidPeriodStarted = false;
         Integer humidPeriodHour = 0;
         // This excludes dates before gs32 and inside protection periods
-        Integer humidPeriodHourinSusceptiblePhase = 0;
+        Integer humidPeriodHourInSusceptiblePhase = 0;
         while(currentDate.compareTo(lastDate) <= 0){
             Double RR = this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.RR);
             Double UM = this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.UM);
@@ -116,11 +116,11 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
             humidPeriodHour = humidHour == 1 ? humidPeriodHour + 1 : 0;
             this.dataMatrix.setParamIntValueForDate(currentDate, DataMatrix.HPH, humidPeriodHour);
             
-            humidPeriodHourinSusceptiblePhase = 
+            humidPeriodHourInSusceptiblePhase = 
                     humidHour == 1 
                     && !DateTimeInterval.isDateInIntervals(currentDate, this.protectionPeriods) 
                     && currentDate.after(this.date3rdUpperLeafEmerging)
-                    ? humidPeriodHourinSusceptiblePhase + 1 : 0;
+                    ? humidPeriodHourInSusceptiblePhase + 1 : 0;
             
             cal.setTime(currentDate);
             cal.add(Calendar.HOUR_OF_DAY, -this.slidingHoursAhead );
@@ -133,8 +133,9 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
             r.setValidTimeStart(new Date(currentDate.getTime()));
             r.setWarningStatus(currentDate.after(this.date3rdUpperLeafEmerging) && currentDate.before(this.dateGs75) ? Result.WARNING_STATUS_NO_RISK: Result.WARNING_STATUS_NO_WARNING);
             r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HPH, String.valueOf(humidPeriodHour));
-            r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HPHPP, String.valueOf(humidPeriodHourinSusceptiblePhase));
+            r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HPHPP, String.valueOf(humidPeriodHourInSusceptiblePhase));
             r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HH, String.valueOf(humidHour));
+            r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HHS, String.valueOf(slidingWindowSum));
             r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.LEAF_WETNESS, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.BT)));
             r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.RELATIVE_HUMIDITY_MEAN, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.UM)));
             r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.PRECIPITATION, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.RR)));
@@ -165,63 +166,7 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
                 }
                 humidHoursConsecutive.clear();
             }
-            /*
-            // Decide the warning status
-            r.setWarningStatus(Result.WARNING_STATUS_NO_WARNING);
-            if(currentDate.compareTo(this.date3rdUpperLeafEmerging) >= 0 && currentDate.compareTo(this.dateGs75) <= 0)
-            {
-                if(humidPeriodHourOutsideProtectionPeriod > this.thresholdHumidPeriodHours)
-                {
-                    r.setWarningStatus(Result.WARNING_STATUS_HIGH_RISK);
-                    //humidPeriodStarted = Boolean.TRUE;
-                }
-                else
-                {
-                    r.setWarningStatus(Result.WARNING_STATUS_NO_RISK);
-                }
-            }*/
             
-            /*Optional<Result> previousR = retVal.stream().filter(res->res.getValidTimeStart().compareTo(middleOfSlidingWindowDate) == 0).findFirst();
-            if(previousR.isPresent()){
-                Result inTheMiddleR = previousR.get();
-                inTheMiddleR.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HHS, slidingWindowSum.toString());
-                
-                // Here we also decide the warning status
-                // If growth stage > 32 (date of 3rd upper leaf emerging)
-                // Account for all leaves being alive (75 days from emerging?)
-                // And we have a humid period (19 consecutive hours) -> Treatment
-                // If treatment, no risk until x days after treatment
-                
-                
-                // Challenge
-                if(inTheMiddleR.getValidTimeStart().compareTo(this.date3rdUpperLeafEmerging) >= 0
-                        && inTheMiddleR.getValidTimeStart().compareTo(this.dateGs75) <= 0        
-                        )
-                {
-                    if(humidPeriodStarted)
-                    {
-                        inTheMiddleR.setWarningStatus(Result.WARNING_STATUS_HIGH_RISK);
-                    }
-                    else
-                    {
-                        inTheMiddleR.setWarningStatus(Result.WARNING_STATUS_NO_RISK); // The default
-                        // Are we in a period of high/long humidity?
-                        if(Integer.valueOf(inTheMiddleR.getValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HHS)) > this.thresholdHumidPeriodHours)
-                        {
-                            // are we after the last protected period (spraying applied + duration of protection)??
-                            if(this.lastSprayingProtectionEnd == null || inTheMiddleR.getValidTimeStart().compareTo(this.lastSprayingProtectionEnd) >= 0)
-                            {
-                                inTheMiddleR.setWarningStatus(Result.WARNING_STATUS_HIGH_RISK);
-                                humidPeriodStarted = Boolean.TRUE;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    inTheMiddleR.setWarningStatus(Result.WARNING_STATUS_NO_WARNING);
-                }
-            }*/
             retVal.add(r);
             
             currentDate.add1Hour();
