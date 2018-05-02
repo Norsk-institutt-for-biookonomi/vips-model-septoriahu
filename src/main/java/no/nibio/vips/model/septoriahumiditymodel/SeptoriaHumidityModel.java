@@ -134,8 +134,13 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
             r.setWarningStatus(currentDate.after(this.date3rdUpperLeafEmerging) && currentDate.before(this.dateGs75) ? Result.WARNING_STATUS_NO_RISK: Result.WARNING_STATUS_NO_WARNING);
             r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HPH, String.valueOf(humidPeriodHour));
             r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HPHPP, String.valueOf(humidPeriodHourInSusceptiblePhase));
+            r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.THPHPP, String.valueOf(this.thresholdHumidPeriodHours));
             r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HH, String.valueOf(humidHour));
             r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.HHS, String.valueOf(slidingWindowSum));
+            if(DateTimeInterval.isDateInIntervals(currentDate, this.protectionPeriods))
+            {
+                r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.SPP, "1");
+            }
             r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.LEAF_WETNESS, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.BT)));
             r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.RELATIVE_HUMIDITY_MEAN, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.UM)));
             r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.PRECIPITATION, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.RR)));

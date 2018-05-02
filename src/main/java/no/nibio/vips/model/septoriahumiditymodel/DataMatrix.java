@@ -41,4 +41,8 @@ public class DataMatrix extends DateMap {
     public final static String HPH = "HPH";
     // Humid period hour (consecutive humid hours) corrected for protection period
     public final static String HPHPP = "HPHPP";
+    // Threshold for consecutive humid hours
+    public final static String THPHPP = "THPHPP";
+    // Is this in the Spraying Protection Period? (1/0)
+    public final static String SPP = "SPP";
 }
