@@ -429,7 +429,7 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
         
         // Make sure we have weather data from dateGs31
         calculateGrowthStages();
-        if(this.dataMatrix.getFirstDateWithParameterValue("RR").after(dateGs31))
+        if(this.dataMatrix.getFirstDateWithParameterValue("RR") == null || this.dataMatrix.getFirstDateWithParameterValue("RR").after(dateGs31))
         {
             throw new ConfigValidationException("ERROR: Missing weather data. First date with precipitation data is " + this.dataMatrix.getFirstDateWithParameterValue("RR") + ", date for GS 31 = " + this.dateGs31);
         }
