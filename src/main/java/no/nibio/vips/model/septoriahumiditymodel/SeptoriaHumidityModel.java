@@ -141,7 +141,7 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
             {
                 r.setValue(SeptoriaHumidityModel.MODEL_ID.toString(), DataMatrix.SPP, "1");
             }
-            r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.LEAF_WETNESS, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.BT)));
+            r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.LEAF_WETNESS_DURATION, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.BT)));
             r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.RELATIVE_HUMIDITY_MEAN, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.UM)));
             r.setValue(CommonNamespaces.NS_WEATHER, WeatherElements.PRECIPITATION, String.valueOf(this.dataMatrix.getParamDoubleValueForDate(currentDate, DataMatrix.RR)));
 
@@ -416,7 +416,7 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
                         this.dataMatrix.setParamDoubleValueForDate(o.getTimeMeasured(), DataMatrix.UM, o.getValue());
                     }
                     break;
-                case WeatherElements.LEAF_WETNESS:
+                case WeatherElements.LEAF_WETNESS_DURATION:
                     if(o.getLogIntervalId().equals(WeatherObservation.LOG_INTERVAL_ID_1H))
                     {
                         this.dataMatrix.setParamDoubleValueForDate(o.getTimeMeasured(), DataMatrix.BT, o.getValue());
