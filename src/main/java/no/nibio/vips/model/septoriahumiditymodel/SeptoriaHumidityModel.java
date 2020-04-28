@@ -19,7 +19,6 @@
 
 package no.nibio.vips.model.septoriahumiditymodel;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.text.ParseException;
@@ -311,9 +310,7 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
         
         // Object deserialization tool
         ObjectMapper mapper = new ObjectMapper();
-        
-        
-        
+
         // TODO: Have defaults for these?
         try
         {
@@ -399,7 +396,7 @@ public class SeptoriaHumidityModel extends I18nImpl implements Model {
             this.lastSprayingProtectionEnd = DateTimeInterval.getLastEndDate(Arrays.asList(new DateTimeInterval[]{this.protectionPeriod1,this.protectionPeriod2}));
         }
         
-        List<WeatherObservation> observations = mapper.convertValue(config.getConfigParameter("observations"), new TypeReference<List<WeatherObservation>>(){});
+        List<WeatherObservation> observations = this.modelUtil.extractWeatherObservationList(config.getConfigParameter("observations"));
         for(WeatherObservation o:observations)
         {
             switch(o.getElementMeasurementTypeId())
