@@ -111,7 +111,7 @@ public class SeptoriaHumidityModelTest {
         SeptoriaHumidityModel instance = new SeptoriaHumidityModel();
         String result = instance.getModelName();
         assertNotNull(result);
-        
+        assertTrue(!result.isBlank());
     }
 
     /**
