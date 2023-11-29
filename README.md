@@ -15,7 +15,7 @@
 <p>N&aring;r antall timer med bladfuktighet i en mottakelig sort n&aelig;rmer seg 20, vil risikokurven g&aring;r over i et r&oslash;dt omr&aring;de og direkte bekjempingstiltak skal vurderes pga. av &oslash;kt infeksjonsrisiko. Det vises ogs&aring; en prognose for de kommende dager.</p>
 <p>&nbsp;</p>
 <p><img src="src/main/resources/images/image_02.jpg" title="Fig. 1a Eksempel p&aring; h&oslash;yt antall varsler (i r&oslash;dt) for &Aring;s, v&aring;rhvete i 2017, gjennom hele sesongen uten spr&oslash;yting."/><br /><em>Fig. 1a Eksempel p&aring; h&oslash;yt antall varsler (i r&oslash;dt) for &Aring;s, v&aring;rhvete i 2017, gjennom hele sesongen uten spr&oslash;yting.</em></p>
-<p>&nbsp;{{filename="/images/image_03.jpg" description="Fig. 1b Eksempel p&aring; lav risiko, ingen varsel for &Aring;s, v&aring;rhvete i 2018, gjennom hele sesongen uten spr&oslash;yting."}}<br /><em>Fig. 1b Eksempel p&aring; lav risiko, ingen varsel for &Aring;s, v&aring;rhvete i 2018, gjennom hele sesongen uten spr&oslash;yting.</em></p>
+<p><img src="src/main/resources/images/image_03.jpg" title="Fig. 1b Eksempel p&aring; lav risiko, ingen varsel for &Aring;s, v&aring;rhvete i 2018, gjennom hele sesongen uten spr&oslash;yting."/><br /><em>Fig. 1b Eksempel p&aring; lav risiko, ingen varsel for &Aring;s, v&aring;rhvete i 2018, gjennom hele sesongen uten spr&oslash;yting.</em></p>
 <h3>Varslingssesong &ndash; oppstart og avslutning av varsel</h3>
 <p>Modellen begynner &aring; oppsummere antall fuktige timer ved utviklingsstadium BBCH 32.</p>
 <h3>Utpr&oslash;ving og validering av modellen</h3>
