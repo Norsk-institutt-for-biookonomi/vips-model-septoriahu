@@ -1,7 +1,26 @@
 # SeptoriaHumidityModel
 
-**(Norwegian description only)**
+## English description from [the IPM Decisions Platform](https://platform.ipmdecisions.net/dss-info-list)
 
+**THE PEST:** Leaf blotch diseases of wheat can be caused by septoria tritici blotch (*Zymoseptoria tritici*) and staganospora nodorum blotch (*Parastagonospora nodorum*), which are both  favoured by wet conditions. 
+**THE DECISION:** Fungicide treatments may need to be applied between stem extension and ear emergence, mainly to protect the upper leaves.  
+**THE MODEL:** Weather data from GS 31 are used. The humidity model estimates risk of septoria tritici blotch infections in winter wheat. Risk of attack is assumed after 20 hours with continuous wetness. A wet hour is defined as minimum 0,2 mm precipitation in an hour or minimum 85% relative humidity. 
+**THE PARAMETERS:**  Dates of key growth stages are given as default values, but these may not be correct for your location.  To obtain accurate risk predictions it is essential to click on the 'Edit parameters' button, enter the estimated dates of GS31 (first node detectable), GS32 (second node; third upper leaf emerging), GS33 (third node; second upper leaf emerging), GS37/39 (uppermost flag leaf emerging)  and GS75 (grain content milky).  These estimated dates can be updated during the season as growth stages are reached. Adding information on septoria fungicide spray dates is vital for the model. After spraying, the model assumes that the crop is protected for 10 days.   
+**SOURCE:** Created by Aahus University and SEGES and released in Denmark in 2017. Tested in Lithuania, Norway, Sweden, Finland and Denmark in 2018 and 2019. 
+**ASSUMPTIONS:** septoria tritici blotch is present in the crop and periods with high humidity create risk for a damaging epidemic
+
+### Crop
+Winter Wheat, wheat
+
+### Pest
+Septoria leaf blotch, Glume blotch, Tan spot
+
+### Author
+Lise N. Jørgensen (Aarhus University)
+
+
+
+## Norwegian description
 <p>Skadegj&oslash;rer(e): hveteaksprikk, hvetebladprikk og hvetebrunflekk + (<em>Parastagonospora nodorum, Zymoseptoria tritici, Pyrenophora tritici-repentis</em>)</p>
 <p><img src="src/main/resources/images/image_01.jpg" title="Typiske symptomer av bladflekksjukdommer i hvete og hveteaksprikk i felt."/><br /><em>Typiske symptomer av bladflekksjukdommer i hvete og hveteaksprikk i felt.</em></p>
 <h3>Modellbeskrivelse</h3>
@@ -34,7 +53,7 @@
 
 
 
-### Development
+## Development
 
 Clone Gitlab repository
 
@@ -42,3 +61,11 @@ Clone Gitlab repository
 $ git clone https://gitlab.nibio.no/VIPS/models/java/Model_SEPTORIAHU.git
 $ cd Model_SEPTORIAHU
 ```
+
+### Compile, run tests
+```bash
+mvn clean install
+```
+
+### Deploy to VIPSCore
+See [the VIPSCore README](https://gitlab.nibio.no/VIPS/VIPSCore)
