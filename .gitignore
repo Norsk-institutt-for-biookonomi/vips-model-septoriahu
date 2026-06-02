@@ -2,3 +2,4 @@ target/
 classes/
 /nbproject/
 .idea/
+.vscode/settings.json
